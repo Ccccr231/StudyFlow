@@ -1,0 +1,50 @@
+/* 高清独立立绘与实景参照校门，只在文字附近铺柔光。 */
+.vn-welcome { touch-action: auto; }
+.vn-welcome .gate-backdrop { inset: 0 0 11%; background: url('/assets/generated/dlut-gate-summer-v2.webp') center bottom / cover no-repeat; opacity: 1; filter: none; }
+.vn-welcome:before { background: linear-gradient(90deg,#edf5fcf5 0%,#eef5fbd9 28%,#eef5fb30 55%,transparent 75%),linear-gradient(0deg,#dce9f8 2%,#dce9f870 16%,transparent 40%); }
+.vn-welcome:after { opacity: .05; }
+.vn-sky-light { background: radial-gradient(ellipse at 15% 8%,#fff9e775,transparent 55%); }
+.vn-welcome .hero-scene { right: 1%; width: 46%; bottom: 110px; top: 50px; pointer-events: none; }
+.vn-welcome .hero-character { background: url('/assets/generated/lianli-hd.png') center bottom / contain no-repeat; left: 0; width: 100%; height: 100%; bottom: 0; max-height: none; aspect-ratio: auto; clip-path: none; mask-image: linear-gradient(#000 85%,transparent 100%); filter: drop-shadow(0 12px 16px #26476617); }
+.vn-character-caption { right: 7%; top: 15%; text-shadow: 0 1px 8px #fff; }
+.vn-welcome .welcome-bottom .vn-click-hint { display: inline; font-size: 10px; letter-spacing: 2px; }
+.vn-campus-transition { position: absolute; inset: 0; z-index: 8; pointer-events: none; overflow: hidden; background: #e3edf5; }
+.vn-avenue-backdrop { position: absolute; inset: -2%; background: url('/assets/generated/sycamore-avenue.webp') center / cover no-repeat; }
+.vn-campus-transition:after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg,#18372c85,transparent 60%); }
+.vn-transition-line { position: absolute; z-index: 1; left: 8.5%; bottom: 14%; color: #fff; text-shadow: 0 2px 12px #12362488; }
+.vn-transition-line small { font-size: 12px; letter-spacing: 5px; }
+.vn-transition-line p { font-family: 'Songti SC','SimSun',serif; font-size: clamp(25px,3vw,42px); line-height: 1.9; letter-spacing: 3px; margin-top: 18px; }
+.vn-transition-line p>span { font-size: .7em; }
+.vn-transition-line i { display: block; width: 56px; height: 1px; background: #ffffffa3; margin-top: 25px; }
+.is-entering .welcome-header { pointer-events: none; }
+.auth-art { background: url('/assets/generated/sycamore-avenue.webp') center / cover; }
+.auth-character { background: url('/assets/generated/lianli-hd.png') center bottom / contain no-repeat; }
+.banner-illustration { background: url('/assets/generated/lianli-hd.png') center top / 69% auto no-repeat; mask-image: linear-gradient(90deg,transparent,#000 23%); }
+.vn-companion .pet-body { background: url('/assets/generated/lianli-chibi-hd.png') center bottom / contain no-repeat; mix-blend-mode: normal; border-radius: 0; filter: drop-shadow(0 6px 6px #16395112); }
+.vn-companion .pet-body:hover { filter: drop-shadow(0 6px 6px #16395125); }
+.app-shell:before { background: var(--study-scene) center / cover no-repeat; }
+.app-shell:after { background: linear-gradient(115deg,#edf4fbe0,#eaf2fbd4 65%,#e8f1fac9); opacity: 1; filter: none; }
+.scene-picker { display: flex; gap: 6px; align-items: center; font-size: 10px; color: #4f6b85; }
+.scene-picker>span { white-space: nowrap; }
+.scene-picker select { max-width: 125px; min-height: 36px; padding: 5px 8px; border: 1px solid #ffffffbf; border-radius: 8px; background: #ffffff8c; color: #3c607f; font-size: 11px; }
+.scene-preview { height: 180px; margin: 20px 0 14px; border: 1px solid #fff; border-radius: 12px; background-size: cover; background-position: center; }
+.scene-options { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; margin-bottom: 18px; }
+.scene-options>button { padding: 5px; border: 1px solid #b5c7db73; border-radius: 9px; background: #ffffff8c; }
+.scene-options>button[aria-pressed=true] { border-color: #51779e; background: #f4faffdc; box-shadow: 0 0 0 1px #51779e; }
+.scene-options>button>span { display: block; height: 55px; border-radius: 5px; background-size: cover; background-position: center; }
+.scene-options strong { display: block; font-size: 11px; font-weight: 500; padding: 8px 1px 4px; color: #3e607e; }
+[data-slot=button] { transition-property: color,background-color,border-color,box-shadow; }
+@media(max-width:760px) {
+  .vn-welcome .gate-backdrop { inset: auto 0 28%; height: 400px; background-position: 45% bottom; background-size: auto 400px; background-color: transparent; mask-image: linear-gradient(transparent,#000 35%); }
+  .vn-welcome:before { background: linear-gradient(120deg,#edf5fcf2,#edf5fb99 43%,#edf5fb18 65%),linear-gradient(0deg,#dce9f8 9%,#dce9f8b3 25%,transparent 57%); }
+  .vn-welcome .hero-scene { top: 230px; bottom: 135px; right: -10%; width: 75%; height: auto; }
+  .vn-welcome .hero-character { background-size: contain; mask-image: linear-gradient(#000 80%,transparent 100%); }
+  .vn-welcome .welcome-description { width: 50%; max-width: 50%; }
+  .vn-character-caption { top: 8%; right: 11%; }
+  .vn-welcome .welcome-bottom .vn-click-hint { display: block; margin: 0 auto; font-size: 9px; }
+  .vn-dialogue-surface { background: linear-gradient(110deg,#ffffffde,#eff6fedb); }
+  .vn-transition-line { left: 8%; bottom: 18%; }
+  .scene-picker { margin-left: auto; }.scene-picker>span { display: none; }.scene-picker select { max-width: 105px; font-size: 10px; }
+  .topbar-right { gap: 9px; }.topbar .local-badge { display: none; }
+  .banner-illustration { background-size: 100% auto; background-position: center top; }
+}

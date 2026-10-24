@@ -1,0 +1,10 @@
+"use client";
+import { useState } from "react";
+import { Check, ArrowUpRight, BookOpen, Plus, CalendarDays } from "lucide-react";
+import { SpringButton as Button } from "@/components/spring-button";
+import type { Task } from "./types";
+export function TaskList({ tasks, onToggle, onAdd, busy, showDate = false }: { tasks: Task[]; onToggle: (task: Task) => void; onAdd: () => void; busy: boolean; showDate?: boolean }) {
+  const [page, setPage] = useState(0);
+  const safePage = Math.min(page, Math.max(0, Math.ceil(tasks.length / 8) - 1));
+  return <>{tasks.length === 0 ? <div className="empty-state"><span><BookOpen size={24} /></span><h3>留白，是一个好开始。</h3><p>添加第一项任务，把想做的事变成今天的一小步。</p><Button variant="outline" onClick={onAdd}><Plus size={14} />添加第一项任务</Button></div> : <div className="task-list">{tasks.slice(safePage * 8, (safePage + 1) * 8).map(task => <article className={`task-row ${task.completed ? "done" : ""}`} key={task.id}><button className="task-check" role="checkbox" aria-checked={task.completed} aria-label={`${task.completed ? "取消完成" : "完成任务"}：${task.title}`} disabled={busy} onClick={() => onToggle(task)}>{task.completed && <Check size={13} />}</button><div className="task-info"><h3>{task.title}</h3><p><span className="subject-tag">{task.subject}</span><span>{task.estimatedMinutes} 分钟</span>{showDate && <span className="task-date"><CalendarDays size={11} />{task.scheduledDate}</span>}</p></div><button className="task-focus" aria-label={`专注：${task.title}`} disabled={task.completed} onClick={() => { window.dispatchEvent(new CustomEvent("studyflow:focus-task", { detail: task.id })); document.getElementById("focus-timer")?.scrollIntoView({ behavior: "smooth", block: "center" }); }}><ArrowUpRight size={17} /></button></article>)}</div>}{tasks.length > 8 && <div className="pagination"><button disabled={safePage === 0} onClick={() => setPage(safePage - 1)}>上一页</button><span>{safePage + 1} / {Math.ceil(tasks.length / 8)}</span><button disabled={(safePage + 1) * 8 >= tasks.length} onClick={() => setPage(safePage + 1)}>下一页</button></div>}</>;
+}
