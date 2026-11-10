@@ -21,6 +21,7 @@ services:
       DATABASE_URL: postgresql://studyflow:${POSTGRES_PASSWORD}@db:5432/studyflow
       APP_ORIGIN: ${APP_ORIGIN:-http://localhost:8080}
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      MODEL_ENCRYPTION_KEY: ${MODEL_ENCRYPTION_KEY:?Set MODEL_ENCRYPTION_KEY in deploy.env}
       MODEL_BASE_URL: ${MODEL_BASE_URL:-}
       MODEL_NAME: ${MODEL_NAME:-}
       MODEL_API_KEY: ${MODEL_API_KEY:-}

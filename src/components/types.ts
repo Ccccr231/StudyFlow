@@ -4,7 +4,7 @@ export type Focus = { id: string; taskId: string | null; plannedSeconds: number;
 export type AgentRun = { id: string; prompt: string; status: string; analysis: string; proposal: import("@/modules/agent/provider").Proposal; createdAt: string };
 export type Dashboard = {
   user: { name: string; username: string; id: string }; tasks: Task[]; plans: Plan[]; focus: Focus[]; activeFocus: Focus | null; agentRuns: AgentRun[]; serverNow: string;
-  model: { configured: boolean; name: string; kind: string };
+  model: { configured: boolean; name: string; kind: string; provider?: string };
   stats: { today: string; todaySeconds: number; weekSeconds: number; totalTasks: number; completedTasks: number; todayTotal: number; todayCompleted: number; sessions: number; week: { date: string; label: string; minutes: number }[] };
 };
 export async function request<T>(url: string, method = "GET", body?: unknown): Promise<T> {

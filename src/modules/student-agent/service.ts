@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { assert, ApiError } from "@/lib/api";
-import { chatModel, modelStatus, planningTools, proposalSchema, type ChatMessage, type ChatModel } from "@/modules/agent/provider";
+import { userChatModel, planningTools, proposalSchema, type ChatMessage, type ChatModel } from "@/modules/agent/provider";
 import { observe, storeProposal } from "@/modules/agent/service";
 import { listMaterials, searchMaterials } from "@/modules/knowledge/service";
 import type { ToolTrace } from "./types";
@@ -41,9 +41,9 @@ export async function removeAgentItem(userId: string, kind: "conversation" | "ob
   return { deleted: true };
 }
 
-export async function sendMessage(userId: string, input: z.input<typeof messageInput>, model: ChatModel = chatModel) {
+export async function sendMessage(userId: string, input: z.input<typeof messageInput>, model?: ChatModel) {
   const value = messageInput.parse(input);
-  if (model === chatModel) assert(modelStatus().configured, 503, "尚未连接模型，请先完成服务端模型配置");
+  model ??= await userChatModel(userId);
   let id = value.conversationId;
   if (!id) {
     assert(await db.agentConversation.count({ where: { userId } }) < 60, 400, "会话数量已达上限，请先删除不用的会话");

@@ -22,6 +22,15 @@ model User {
   materials    StudyMaterial[]
   conversations AgentConversation[]
   observations LearningObservation[]
+  modelSetting UserModelSetting?
+}
+
+model UserModelSetting {
+  userId          String @id
+  provider        String
+  model           String
+  encryptedApiKey String
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Session {

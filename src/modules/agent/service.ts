@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { assert, ApiError } from "@/lib/api";
 import { aggregate } from "@/modules/analytics/service";
-import { CompatibleModel, proposalSchema, type ModelProvider } from "./provider";
+import { CompatibleModel, proposalSchema, userChatModel, type ModelProvider } from "./provider";
 export async function observe(userId: string) {
   return db.$transaction(async tx => {
     const user = await tx.user.findUniqueOrThrow({ where: { id: userId }, select: { revision: true } });
@@ -12,7 +12,8 @@ export async function observe(userId: string) {
     return { revision: user.revision, today: stats.today, tasks, plans, stats, focus: focus.slice(0, 100).map(f => ({ taskId: f.taskId, status: f.status, elapsedSeconds: f.elapsedSeconds, startedAt: f.startedAt })) };
   });
 }
-export async function propose(userId: string, prompt: string, provider: ModelProvider = new CompatibleModel()) {
+export async function propose(userId: string, prompt: string, provider?: ModelProvider) {
+  provider ??= new CompatibleModel(await userChatModel(userId));
   const snapshot = await observe(userId);
   const summary = `共 ${snapshot.stats.totalTasks} 项任务，已完成 ${snapshot.stats.completedTasks} 项；今日已打卡专注 ${Math.round(snapshot.stats.todaySeconds / 60)} 分钟，本周 ${Math.round(snapshot.stats.weekSeconds / 60)} 分钟。`;
   const result = await provider.propose({ prompt, snapshot, analysis: summary });

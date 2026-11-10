@@ -268,3 +268,12 @@ form input[data-slot=input] { height: 42px; border-radius: 9px; font-size: 13px;
 .duration-options>button { color: #5e7390; }.duration-options>button[aria-pressed=true] { color: #3c639b; }
 @media(max-width:760px) { .companion-balloon { right: 0; bottom: 127px; }.glass-signature { display: none; }.stat-card>p { font-size: 9px; } }
 @media(prefers-reduced-motion:reduce), (prefers-reduced-transparency:reduce) { .glass-signature { display: none; } }
+.personal-model-settings { min-width: 0; }
+.model-settings-description,.model-settings-status { font-size: 13px; line-height: 1.8; color: #506583; margin: 14px 0; overflow-wrap: anywhere; }
+.model-settings-status { padding: 12px 14px; background: #f1f5fc; border-radius: 9px; }
+.personal-model-settings form { display: flex; flex-direction: column; gap: 9px; }
+.personal-model-settings form label { margin-top: 10px; font-size: 13px; color: #3e5778; }
+.personal-model-settings input,.personal-model-settings select { width: 100%; min-width: 0; min-height: 44px; font-size: 16px; }
+.personal-model-settings small { font-size: 12px; line-height: 1.7; color: #5d708a; }
+.model-settings-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+.settings-grid .model-settings-actions button { min-height: 44px; font-size: 13px; }
