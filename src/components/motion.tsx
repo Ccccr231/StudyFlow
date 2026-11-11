@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useRef, type ReactNode } from "react";
-import { useReducedMotion } from "motion/react";
-import dynamic from "next/dynamic";
-const LiquidGlass = dynamic(() => import("liquid-glass-react"), { ssr: false });
+import { GlassBackdrop } from "./glass-backdrop";
 export const spring = { type: "spring" as const, duration: 0.5, bounce: 0.2 };
 export const smallSpring = { type: "spring" as const, duration: 0.25, bounce: 0.1 };
 
@@ -17,8 +15,7 @@ export function ScreenStage({ id, children }: { id: string; children: ReactNode 
   return <div className="screen-stage" ref={stage}><div key={id} className={`screen-layer screen-${id}`}>{children}</div></div>;
 }
 
-/** 仅在小面积姓名牌应用折射；正文仍用可读的 CSS 玻璃衬底。 */
+/** 姓名牌与卡片复用同一套背景折射，正文不参与滤镜。 */
 export function GlassNameplate({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
-  return <div className={`glass-nameplate ${className}`}><div className="nameplate-optics" aria-hidden="true">{!reduce && <LiquidGlass style={{ position: "absolute", top: "50%", left: "50%", width: "100%" }} displacementScale={24} blurAmount={0.12} saturation={115} aberrationIntensity={0.2} elasticity={0} cornerRadius={12} padding="14px 18px"><span>&nbsp;</span></LiquidGlass>}</div><span className="nameplate-content">{children}</span></div>;
+  return <div className={`glass-nameplate ${className}`}><GlassBackdrop /><span className="nameplate-content">{children}</span></div>;
 }

@@ -1,0 +1,237 @@
+/* 校园液态玻璃：正文保留独立衬底，折射只作用于小面积场景副本。 */
+:root {
+  --frost-surface: linear-gradient(135deg, #ffffffc9, #f0f7ffad);
+  --frost-border: #fffffff0;
+  --frost-shadow: 0 12px 32px #264c6d0d, 0 2px 6px #264c6d05,
+    inset 0 1px 0 #fff, inset 0 -1px 0 #ffffff80;
+  --frost-blur: blur(22px) saturate(135%);
+}
+
+.app-shell::after {
+  background: linear-gradient(115deg, #edf4fbbd, #eaf2fbad 65%, #e8f1faa8);
+}
+
+.glass-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: .42;
+  background-color: #edf4fb;
+  background-image: linear-gradient(115deg, #f7fbffcf, #edf5ffc4),
+    var(--glass-scene, var(--study-scene, url('/assets/generated/sycamore-avenue.webp')));
+  background-repeat: no-repeat;
+}
+
+:is(.stat-card, .focus-card, .glass-nameplate, .sidebar-quote, .auth-panel) {
+  position: relative;
+  isolation: isolate;
+}
+
+:is(.panel, .stat-card, .agent-teaser, .student-agent .panel,
+  .vn-dialogue-surface, .vn-companion-dialogue, .auth-panel, .study-dialog) {
+  border: 1px solid var(--frost-border);
+  background: var(--frost-surface);
+  -webkit-backdrop-filter: var(--frost-blur);
+  backdrop-filter: var(--frost-blur);
+  box-shadow: var(--frost-shadow);
+}
+
+.panel { border-radius: 22px; }
+.stat-card { border-radius: 20px; padding-block: 20px; }
+.stat-card .glass-backdrop {
+  background-image: linear-gradient(120deg, #ffffffd6, #f3f8ffb8), var(--study-scene);
+}
+.stat-icon { width: 32px; height: 32px; border-radius: 11px; box-shadow: inset 0 1px #fff, 0 3px 8px #244e7008; }
+.stat-value { color: #244568; }
+.stat-label, .stat-card > p, .panel-subtitle, .task-info p { color: #465e78; }
+.panel-heading h2, .focus-card h2 { color: #243f60; }
+
+/* 浮起的侧栏和顶栏留出细窄场景缝隙。 */
+@media (min-width: 761px) {
+  .sidebar {
+    inset: 16px auto 16px 14px;
+    width: 211px;
+    border: 1px solid var(--frost-border);
+    border-radius: 24px;
+    padding: 25px 12px 0;
+    box-shadow: var(--frost-shadow);
+  }
+  .sidebar .brand { margin-left: 7px; font-size: 21px; }
+  .sidebar-caption { padding-left: 14px; }
+  .sidebar-bottom { padding-top: 20px; }
+  .profile { padding-bottom: 20px; }
+  .topbar {
+    margin: 16px 24px 0;
+    padding-inline: 23px;
+    height: 60px;
+    border: 1px solid var(--frost-border);
+    border-radius: 20px;
+    box-shadow: var(--frost-shadow);
+  }
+  .ui-lab-content .sidebar { top: 39px; }
+}
+
+.sidebar, .topbar {
+  background: linear-gradient(120deg, #ffffffbd, #f1f8ff9e);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  backdrop-filter: blur(28px) saturate(140%);
+}
+.sidebar nav button { border: 1px solid transparent; border-radius: 14px; padding-inline: 12px; }
+.sidebar nav button[aria-current=page], .sidebar-setting[aria-current=page] {
+  border-color: #fff;
+  background: linear-gradient(115deg, #ffffffeb, #e0efffbf);
+  box-shadow: inset 0 1px #fff, 0 4px 12px #315e8210;
+  color: #234f7c;
+}
+.sidebar-quote { margin-inline: 3px; border-radius: 18px; background: #f6fbff99; }
+.sidebar-quote .glass-backdrop { opacity: .32; }
+.sidebar-setting { border-radius: 14px; }
+.profile { border-color: #ffffffb3; }
+.scene-picker select {
+  min-height: 40px;
+  border-radius: 12px;
+  background: #ffffff9e;
+  box-shadow: inset 0 1px #fff, 0 2px 5px #234e7205;
+}
+.top-avatar { width: 34px; height: 34px; border: 1px solid #fff; box-shadow: 0 3px 8px #234d7310; }
+
+.daily-banner {
+  border-radius: 24px;
+  background: linear-gradient(115deg, #f7fbffcf, #e5f1ffa6 58%, #d9eafc87);
+  box-shadow: var(--frost-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+.banner-caption {
+  padding: 8px 12px;
+  border: 1px solid #ffffffd9;
+  border-radius: 12px;
+  background: #f8fcffb5;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.banner-copy button {
+  padding: 7px 12px;
+  margin-left: -4px;
+  border: 1px solid #ffffffd4;
+  border-radius: 12px;
+  background: #ffffff78;
+  box-shadow: inset 0 1px #fff;
+}
+
+.focus-card { border-radius: 24px; }
+.focus-card .glass-backdrop {
+  background-image: linear-gradient(145deg, #ffffffd9, #eef6ffd1), var(--study-scene);
+}
+.timer-dial > div {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 22%, #ffffffa6, #f4f9ff30 70%);
+  box-shadow: inset 0 1px 2px #ffffffc7, 0 8px 25px #456e8f08;
+}
+.duration-options {
+  padding: 5px;
+  gap: 4px;
+  border: 1px solid #ffffffd9;
+  border-radius: 14px;
+  background: #dfeaf559;
+  box-shadow: inset 0 1px 3px #315e8210;
+}
+.duration-options > button { min-height: 38px; border: 1px solid transparent; border-radius: 10px; }
+.duration-options > button[aria-pressed=true] {
+  color: #285580;
+  border-color: #fff;
+  background: linear-gradient(130deg, #fff, #edf6ffcf);
+  box-shadow: 0 3px 8px #234d7312, inset 0 1px #fff;
+}
+.agent-teaser { border-radius: 22px; }
+.task-focus, .task-check, .subject-tag, .count-badge { border-color: #ffffffd9; background: #ffffff96; box-shadow: inset 0 1px #fff; }
+.task-check { border-color: #91abc4; }
+.task-tabs { gap: 8px; padding-block: 13px; }
+.task-tabs button { min-height: 38px; padding: 7px 12px; border: 1px solid transparent; border-radius: 10px; }
+.task-tabs button[aria-pressed=true] { border-color: #fff; background: #ffffffb8; box-shadow: 0 3px 10px #294f7210; color: #26517e; }
+.task-tabs button[aria-pressed=true]::after { display: none; }
+
+.week-strip > button {
+  border-color: #ffffffde;
+  border-radius: 18px;
+  color: #46617d;
+  background: var(--frost-surface);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--frost-shadow);
+}
+.week-strip > button[aria-pressed=true] { background: linear-gradient(140deg, #45709fe8, #294e7fe8); border-color: #ffffffab; color: #fff; }
+.sa-tabs button, .agent-workspace-tabs button { border-color: #ffffffed; background: #ffffff9c; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: inset 0 1px #fff; }
+.sa-tabs button[aria-pressed=true], .agent-workspace-tabs button[aria-pressed=true] { background: #e6f1ffe6; border-color: #fff; box-shadow: var(--frost-shadow); }
+
+/* 迎宾保留校园与角色，玻璃对话框成为画面前景。 */
+.vn-welcome { --glass-scene: url('/assets/generated/dlut-gate-summer-v2.webp'); }
+.vn-dialogue-surface { background: linear-gradient(115deg, #ffffffe0, #edf6ffb8); box-shadow: 0 18px 50px #2545631a, inset 0 1px #fff, inset 0 -1px #ffffff85; border-radius: 22px; }
+.vn-dialogue-surface::after { border-radius: 16px; border-color: #ffffff8c; }
+.glass-nameplate { overflow: hidden; background: #eff7ff91; }
+.vn-choice, .vn-dialogue-choices > button { border-color: #ffffffeb; border-radius: 13px; background: linear-gradient(110deg, #ffffffd9, #e5f0ffb0); box-shadow: 0 5px 18px #2a527512, inset 0 1px #fff; }
+.vn-companion-dialogue { background: linear-gradient(135deg, #fffffff0, #eef6ffdf); border-radius: 23px; }
+.vn-companion-dialogue .glass-backdrop { display: none; }
+.pet-name-tag, .companion-mini { border-color: #fff; background: #f5faffb8; box-shadow: var(--frost-shadow); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+
+.screen-auth {
+  background: linear-gradient(115deg, #ecf4fbe3, #eaf3fba6),
+    url('/assets/generated/sycamore-avenue.webp') center / cover fixed;
+}
+.auth-panel { border-radius: 28px; box-shadow: 0 24px 70px #264d6f16, inset 0 1px #fff; }
+.auth-panel .glass-backdrop { background-image: linear-gradient(125deg, #ffffffdf, #eff7ffd4), url('/assets/generated/sycamore-avenue.webp'); }
+.auth-art { border-radius: 28px; }
+.auth-switch { border: 1px solid #ffffffd9; padding: 5px; border-radius: 14px; background: #dfeaf56b; box-shadow: inset 0 1px 3px #294f7210; }
+.auth-switch button { min-height: 44px; border-radius: 10px; }
+.auth-switch button[aria-pressed=true] { background: linear-gradient(135deg, #fff, #edf6ff); box-shadow: 0 3px 8px #244a7012, inset 0 1px #fff; }
+.study-dialog { border-radius: 26px; background: linear-gradient(135deg, #fcfefff0, #eef6ffe8); box-shadow: 0 30px 90px #15345130, inset 0 1px #fff; }
+[data-slot=dialog-overlay] { background: #16314e52; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.study-dialog input, .study-dialog textarea, .study-dialog select, .auth-panel input, .select-label select { border-color: #becfe1; border-radius: 12px; background: #ffffffb8; box-shadow: inset 0 1px 3px #294f7208, 0 1px #ffffffb3; }
+.toast { border-radius: 16px; box-shadow: var(--frost-shadow); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+[data-slot=button] { border-radius: 12px; box-shadow: inset 0 1px #ffffff40, 0 4px 12px #244e7014; }
+
+@media (hover: hover) and (pointer: fine) {
+  .stat-card:hover { box-shadow: 0 16px 36px #264c6d16, inset 0 1px #fff; }
+  .vn-choice:hover, .vn-dialogue-choices > button:hover, .banner-copy button:hover { background: #fffffff2; box-shadow: 0 8px 22px #2a52751c, inset 0 1px #fff; }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .topbar { margin-inline: 18px; padding-inline: 16px; }
+  .topbar-right { gap: 12px; }
+  .date-display { display: none; }
+}
+@media (max-width: 760px) {
+  .topbar { margin: 9px 12px 0; padding-inline: 12px; height: 56px; border: 1px solid #fff; border-radius: 17px; top: 9px; box-shadow: var(--frost-shadow); }
+  .sidebar { background: #f2f8fff0; border-radius: 0 24px 24px 0; border-right: 1px solid #fff; box-shadow: 12px 0 40px #173c5e18; }
+  .ui-lab-content .sidebar { top: 23px; }
+  .main-content { padding-inline: 18px; }
+  .stat-card { border-radius: 18px; }
+  .panel, .agent-teaser, .daily-banner { border-radius: 20px; }
+  .mobile-menu { width: 44px; height: 44px; }
+  .topbar-right { gap: 7px; }
+  .scene-picker select { min-height: 40px; max-width: 98px; }
+  .vn-dialogue-surface { border-radius: 19px; }
+  .vn-dialogue-surface::after { border-radius: 13px; }
+  .auth-panel { border-radius: 24px; }
+  .banner-copy { width: 100%; min-height: 100%; padding: 22px; background: linear-gradient(90deg, #f1f7ffd9, #f1f7ff9c 55%, transparent 90%); }
+  .banner-copy h2 { width: 86%; max-width: 280px; font-size: 22px; letter-spacing: .3px; text-wrap: balance; }
+  .banner-copy p { max-width: 80%; }
+  .banner-caption { max-width: 65%; font-size: 8px; }
+  .week-strip { gap: 5px; }
+  .week-strip > button { border-radius: 12px; }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .glass-backdrop { display: none; }
+  :is(.sidebar, .topbar, .panel, .stat-card, .agent-teaser, .student-agent .panel,
+    .vn-dialogue-surface, .vn-companion-dialogue, .auth-panel, .study-dialog,
+    .glass-nameplate, .sidebar-quote, .week-strip > button) {
+    background: #f5f9fd;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: #9ab0c7;
+  }
+  .week-strip > button[aria-pressed=true] { background: #294e7f; }
+}

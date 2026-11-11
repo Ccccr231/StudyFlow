@@ -4,11 +4,12 @@ import { ArrowRight, ArrowLeft, ShieldCheck } from "lucide-react";
 import { SpringButton as Button } from "@/components/spring-button";
 import { Input } from "@/components/ui/input";
 import { request } from "./types";
+import { GlassBackdrop } from "./glass-backdrop";
 export function Auth({ onDone, onBack }: { onDone: () => void; onBack: () => void }) {
   const [register, setRegister] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  return <main className="auth-screen"><button className="text-button auth-back" onClick={onBack}><ArrowLeft size={16} /> 返回校园</button><div className="auth-art"><div className="auth-character" /><p>海纳百川，自强不息。<span>让每一小步，都算数。</span></p></div><section className="auth-panel"><span className="eyebrow">YOUR OWN LITTLE SPACE</span><h1>{register ? "很高兴，与你一起出发。" : "欢迎回到你的学习空间。"}</h1><p>用本地账号保存每一次专注，所有数据留在这台服务器。</p><div className="auth-switch"><button aria-pressed={register} onClick={() => { setRegister(true); setError(""); }}>创建账号</button><button aria-pressed={!register} onClick={() => { setRegister(false); setError(""); }}>登录账号</button></div><form onSubmit={async e => {
+  return <main className="auth-screen"><button className="text-button auth-back" onClick={onBack}><ArrowLeft size={16} /> 返回校园</button><div className="auth-art"><div className="auth-character" /><p>海纳百川，自强不息。<span>让每一小步，都算数。</span></p></div><section className="auth-panel"><GlassBackdrop /><span className="eyebrow">YOUR OWN LITTLE SPACE</span><h1>{register ? "很高兴，与你一起出发。" : "欢迎回到你的学习空间。"}</h1><p>用本地账号保存每一次专注，所有数据留在这台服务器。</p><div className="auth-switch"><button aria-pressed={register} onClick={() => { setRegister(true); setError(""); }}>创建账号</button><button aria-pressed={!register} onClick={() => { setRegister(false); setError(""); }}>登录账号</button></div><form onSubmit={async e => {
     e.preventDefault(); setBusy(true); setError("");
     const form = new FormData(e.currentTarget);
     try { await request(`/api/auth/${register ? "register" : "login"}`, "POST", { username: form.get("username"), password: form.get("password"), ...(register ? { name: form.get("name") } : {}) }); onDone(); }
